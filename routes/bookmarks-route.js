@@ -3,8 +3,13 @@ let bookmark = require('../model/bookmark-model');
 
 router.route('/:userid').get((req,res)=>{
     let query = { userid: req.params.userid }
-    bookmark.find()
-    .then(users => res.json(users))
+    bookmark.find(query,{ userid: 0,_id : 0,__v: 0})
+    .then(users => {
+    res.json({
+       "articles": users,
+       "status":"ok",
+        "totalResults":users.length
+    })})
     .catch(err => res.status(400).json('Error: '+ err))
 })
 
@@ -13,7 +18,7 @@ router.route('/:userid/add').post((req,res)=>{
    const {author} = req.body
    const {content} = req.body
    const {description} = req.body
-   const {title} = req.params
+   const {title} = req.body
    const {url} = req.body
    const {urlToImage} = req.body
    const {source} = req.body

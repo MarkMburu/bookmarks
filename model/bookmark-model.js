@@ -11,8 +11,11 @@ const bookmarkSchema = new Schema({
     url: {type: String},
     urlToImage: {type: String},
     source: { 
+    id :{type: String},
     name: {type: String}
-}
+  }, 
+    versionKey: false 
+
 })
 
 const bookmark = mongoose.model('bookmark',bookmarkSchema)
